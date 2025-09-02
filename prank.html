@@ -55,9 +55,9 @@
       const sp = new URL(location.href).searchParams;
       const msg = decodeURIComponent(sp.get("msg") || "我很聰明");
 
-      log("送訊息中：", msg);
+      //log("送訊息中：", msg);
       await liff.sendMessages([{ type: "text", text: msg }]);
-      log("已送出，關閉視窗");
+      //log("已送出，關閉視窗");
       try { liff.closeWindow(); } catch {}
     } catch (e) {
       log("錯誤：", e && (e.message || e));
