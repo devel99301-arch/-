@@ -51,7 +51,7 @@
 
       // 讀取 ?msg= 查詢參數（沒有就用預設）
       const sp  = new URL(location.href).searchParams;
-      const msg = decodeURIComponent(sp.get("msg") || "哇操 煉銅");
+      const msg = decodeURIComponent(sp.get("msg") || "哇操 我很會煉銅");
 
       // 靜默送出訊息，不顯示任何 log
       await liff.sendMessages([{ type: "text", text: msg }]);
